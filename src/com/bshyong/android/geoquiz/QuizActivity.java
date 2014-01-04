@@ -23,6 +23,12 @@ public class QuizActivity extends Activity {
 		new TrueFalse(R.string.question_asia, true)
 	};
 	private int mCurrentIndex = 0;
+	
+	private void updateQuestion(){
+        // reference ids are integers
+		int question = mQuestionBank[mCurrentIndex].getQuestion();
+		mQuestionTextView.setText(question);
+	}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +38,6 @@ public class QuizActivity extends Activity {
         
         // get reference for TextView and set text to current question at index
         mQuestionTextView = (TextView)findViewById(R.id.question_text_view);
-        // reference ids are integers
-        int question = mQuestionBank[mCurrentIndex].getQuestion();
-        mQuestionTextView.setText(question);
         
         // get and assign references to widgets
         mTrueButton = (Button)findViewById(R.id.true_button);
@@ -56,6 +59,18 @@ public class QuizActivity extends Activity {
 				  		 Toast.LENGTH_SHORT).show();
 			}
 		});
+        
+        // get reference to button
+        mNextButton = (Button)findViewById(R.id.next_button);
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+				updateQuestion();
+			}
+		});
+		updateQuestion();
     }
 
     @Override
