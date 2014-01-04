@@ -9,6 +9,7 @@ public class QuizActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // inflate ActivityQuiz layout
         setContentView(R.layout.activity_quiz);
     }
 
