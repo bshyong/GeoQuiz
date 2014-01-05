@@ -18,6 +18,7 @@ public class QuizActivity extends Activity {
 	private Button mFalseButton;
 	private Button mNextButton;
 	private ImageButton mBackButton;
+	private Button mCheatButton;
 	private TextView mQuestionTextView;
 	
 	// initialize array of questions
@@ -88,6 +89,7 @@ public class QuizActivity extends Activity {
         
         // get reference to button
         mNextButton = (Button)findViewById(R.id.next_button);
+        // set listener
         mNextButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -96,7 +98,7 @@ public class QuizActivity extends Activity {
 				updateQuestion();
 			}
 		});
-        // get reference to button
+
         mBackButton = (ImageButton)findViewById(R.id.previous_button);
         mBackButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -104,6 +106,15 @@ public class QuizActivity extends Activity {
 			public void onClick(View v) {
 				mCurrentIndex = ((mCurrentIndex - 1) % mQuestionBank.length + mQuestionBank.length)%mQuestionBank.length;
 				updateQuestion();
+			}
+		});
+        
+        mCheatButton = (Button)findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// Start CheatActivity
 			}
 		});
         
