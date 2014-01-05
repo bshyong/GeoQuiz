@@ -2,9 +2,11 @@ package com.bshyong.android.geoquiz;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +15,7 @@ public class QuizActivity extends Activity {
 	private Button mTrueButton;
 	private Button mFalseButton;
 	private Button mNextButton;
+	private ImageButton mBackButton;
 	private TextView mQuestionTextView;
 	
 	// initialize array of questions
@@ -53,6 +56,16 @@ public class QuizActivity extends Activity {
         // get reference for TextView and set text to current question at index
         mQuestionTextView = (TextView)findViewById(R.id.question_text_view);
         
+        // add listener so clicking on TextView will go to next question
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+				updateQuestion();
+			}
+		});
+        
         // get and assign references to widgets
         mTrueButton = (Button)findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +90,18 @@ public class QuizActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+				Log.i("QuizActivity", "array index: " + mCurrentIndex);
+				updateQuestion();
+			}
+		});
+        // get reference to button
+        mBackButton = (ImageButton)findViewById(R.id.previous_button);
+        mBackButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mCurrentIndex = ((mCurrentIndex - 1) % mQuestionBank.length + mQuestionBank.length)%mQuestionBank.length;
+				Log.i("QuizActivity", "array index: " + mCurrentIndex);
 				updateQuestion();
 			}
 		});
