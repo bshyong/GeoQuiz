@@ -35,7 +35,7 @@ public class CheatActivity extends Activity {
 		
 		mAnswerTextView = (TextView)findViewById(R.id.answerTextView);
 		mApiVersion = (TextView)findViewById(R.id.apiVersion);
-		mApiVersion.setText(Build.VERSION.SDK_INT);
+		mApiVersion.setText("Android API level" + Integer.toString(Build.VERSION.SDK_INT));
 		
 		mShowAnswer = (Button)findViewById(R.id.showAnswerButton);
 		mShowAnswer.setOnClickListener(new View.OnClickListener() {
